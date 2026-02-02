@@ -13,7 +13,8 @@ body {
 
 .card {
   background: white;
-  min-width: 420px;
+  max-width: 420px;
+  width: 100%;
   padding: 30px;
   border-radius: 14px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
@@ -126,4 +127,76 @@ body {
 .recent li {
   padding: 6px 0;
   border-bottom: 1px solid #eee;
+}
+
+
+/* ====== MOBILE RESPONSIVE ====== */
+@media (max-width: 600px) {
+  .page {
+    display: flex;
+    align-items: flex-start;
+  }
+  .card {
+    width: 92%;
+    min-width: 200px;
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* .difficulty-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  } */
+
+  /* .difficulty-box span {
+    font-size: 14px;
+  } */
+
+  /* .difficulty-box select {
+    width: 100%;
+    font-size: 14px;
+  } */
+
+  .guess-row {
+    flex-direction: column;
+  }
+
+  .guess-row input {
+    /* width: 100%; */
+    font-size: 16px; /* prevents zoom on iOS */
+  }
+
+  .guess-row button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .newTarget {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .attempts span {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+
+  .no-guesses {
+    font-size: 13px;
+  }
+
+  /* Scroll area height reduced for small screens */
+  .card div[style] {
+    height: 160px !important;
+  }
 }
