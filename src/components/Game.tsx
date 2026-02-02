@@ -21,6 +21,7 @@ const loseMessages = [
   "Even the number is confused how you missed that 🤔💀",
   "Give up karde bhai, kitna try karega 💀",
   "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
+  "Instagram Open kar or reels dekh 💀, tere se nhi ho payega",
   "Your guesses had confidence. Accuracy? Not invited 😎🚫",
   "Bhai ye game tere confidence pe chal raha hai, skill pe nahi 😭",
   "That number dodged you like responsibilities 🏃‍♂️💨",
