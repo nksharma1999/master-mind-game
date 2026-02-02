@@ -109,7 +109,7 @@ function GuessNumberGame() {
   }
 
   function checkGuess() {
-    const maxAttempts = 2;
+    const maxAttempts = 6;
     if (attempts >= maxAttempts) {
       if(giveUpmsg==2){
         setGiveUp(0);
