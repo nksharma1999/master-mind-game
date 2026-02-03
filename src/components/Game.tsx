@@ -26,6 +26,10 @@ const loseMessages = [
   "Bhai ye game tere confidence pe chal raha hai, skill pe nahi 😭",
   "That number dodged you like responsibilities 🏃‍♂️💨",
   "Lagta hai number ne tujhe block kar diya 📵",
+  "Bhai, Arjun Kapoor tere se accha khelta hai!",
+  "Bhai, Arjun Kapoor tere se accha khelta hai!"
+  "Bhai, Arjun Kapoor tere se accha khelta hai!"
+  "Bhai, Arjun Kapoor tere se accha khelta hai!"
   "You didn’t lose… you just *strategically failed* 📉😌",
   "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
   "Bhai tu guess nahi kar raha, attendance laga raha hai 📝",
