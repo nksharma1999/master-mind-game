@@ -27,9 +27,9 @@ const loseMessages = [
   "That number dodged you like responsibilities 🏃‍♂️💨",
   "Lagta hai number ne tujhe block kar diya 📵",
   "Bhai, Arjun Kapoor tere se accha khelta hai!",
-  "Bhai, Arjun Kapoor tere se accha khelta hai!"
-  "Bhai, Arjun Kapoor tere se accha khelta hai!"
-  "Bhai, Arjun Kapoor tere se accha khelta hai!"
+  "Bhai, Arjun Kapoor tere se accha khelta hai!",
+  "Bhai, Arjun Kapoor tere se accha khelta hai!",
+  "Bhai, Arjun Kapoor tere se accha khelta hai!",
   "You didn’t lose… you just *strategically failed* 📉😌",
   "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
   "Bhai tu guess nahi kar raha, attendance laga raha hai 📝",
@@ -53,7 +53,7 @@ const loseMessages = [
   "Bhai tu try kar raha hai ya warm-up? 🏃‍♂️",
   "The number blinked… you missed 👁️❌",
   "Ek din problem reh jayega, aur tu history bann jayega!",
-  "Lagta hai tu vibes pe guess kar raha hai, logic pe nahi ✨🧠",
+  "Lagta hai tu vibe pe guess kar raha hai, logic pe nahi ✨🧠",
   "You guessed like WiFi in a basement 📶⬇️",
   "Bhai tera aim aur stormtrooper ka aim same hai 🎯❌",
   "You didn’t lose the game. You fed the number’s ego 🍽️😤",
@@ -61,7 +61,7 @@ const loseMessages = [
   "The number didn’t move. You still couldn’t find it 🧍‍♂️🔍",
   "Bhai tu haar nahi raha, tu history bana raha hai 📚💀",
   "The number wants a rematch. It’s still bored 😒🔁",
-  "Number ne bola ‘bhai main yahi hoon’, tu phir bhi miss 😭",
+  "Number ne bola ‘bhai main yahi hoon’, tu phir bhi miss kiya 😭",
   "Respect the effort. Fear the results 🫡📉",
   "Bhai tu guess nahi, random button mash kar raha hai 🎮😂",
   "You played well… said no one 🫢🙃",
