@@ -48,6 +48,7 @@ const loseMessages = [
   "Breaking News: Player loses to random number 📰💔",
   "Bhai tu try kar raha hai ya warm-up? 🏃‍♂️",
   "The number blinked… you missed 👁️❌",
+  "Ek din problem reh jayega, aur tu history bann jayega!",
   "Lagta hai tu vibes pe guess kar raha hai, logic pe nahi ✨🧠",
   "You guessed like WiFi in a basement 📶⬇️",
   "Bhai tera aim aur stormtrooper ka aim same hai 🎯❌",
@@ -73,7 +74,10 @@ const loseMessages = [
   "The number called. It said ‘try again buddy’ ☎️😏"
 ];
 
-const getRandomLoseMessage = () => {
+const getRandomLoseMessage = (guessCount:number) => {
+  if(guessCount == 6){
+    return "Himmat ae madaa, toh maddade khuda!!"
+  }
   return loseMessages[Math.floor(Math.random() * loseMessages.length)];
 };
 
@@ -115,15 +119,7 @@ function GuessNumberGame() {
 
   function checkGuess() {
     const maxAttempts = 6;
-    if (attempts >= maxAttempts) {
-      if(giveUpmsg==2){
-        setGiveUp(0);
-        alert(`💀 ${getRandomLoseMessage()}`);
-      }else{
-        setGiveUp(pre => pre+1);
-      }
-      
-    }
+    
 
     if (guess.length !== numberLength) {
       alert(`Please enter a ${numberLength}-digit number`);
@@ -173,8 +169,16 @@ function GuessNumberGame() {
 
     if (guess === secretNumber) {
       alert(`🎉 ${getRandomWinMessage(secretNumber, attempts + 1,numberLength)} 🏆`);
+      return;
     }
-
+    if (attempts >= maxAttempts) {
+      if(giveUpmsg==2){
+        setGiveUp(0);
+        alert(`💀 ${getRandomLoseMessage(attempts)}`);
+      }else{
+        setGiveUp(pre => pre+1);
+      }
+    }
     setGuess("");
     focus?.current?.focus();
   }
