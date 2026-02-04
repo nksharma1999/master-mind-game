@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 interface result {
   guess: string;
@@ -103,6 +104,7 @@ function GuessNumberGame() {
   const [attempts, setAttempts] = useState(0);
   const focus = useRef<HTMLInputElement | null>(null);
   const [giveUpmsg, setGiveUp] = useState<number>(2);
+  const [win ,setWin] = useState<boolean>(false);
   function generateNumber(length: number) {
     let num = "";
     for (let i = 0; i < length; i++) {
@@ -119,6 +121,7 @@ function GuessNumberGame() {
     setAttempts(0);
     setGuess("");
     setGiveUp(2);
+    setWin(false);
   }
 
   function checkGuess() {
@@ -126,7 +129,7 @@ function GuessNumberGame() {
     
 
     if (guess.length !== numberLength) {
-      alert(`Please enter a ${numberLength}-digit number`);
+      toast(`Please enter a ${numberLength}-digit number`);
       return;
     }
 
@@ -172,13 +175,14 @@ function GuessNumberGame() {
     setAttempts(attempts + 1);
 
     if (guess === secretNumber) {
-      alert(`🎉 ${getRandomWinMessage(secretNumber, attempts + 1,numberLength)} 🏆`);
+      setWin(true);
+      toast(`🎉 ${getRandomWinMessage(secretNumber, attempts + 1,numberLength)} 🏆`);
       return;
     }
     if (attempts >= maxAttempts) {
       if(giveUpmsg==2){
         setGiveUp(0);
-        alert(`💀 ${getRandomLoseMessage(attempts)}`);
+        toast(`💀 ${getRandomLoseMessage(attempts)}`)
       }else{
         setGiveUp(pre => pre+1);
       }
@@ -186,6 +190,19 @@ function GuessNumberGame() {
     setGuess("");
     focus?.current?.focus();
   }
+
+  useEffect(()=>{
+    if(win){
+      setTimeout(()=>{
+        setSecretNumber(generateNumber(numberLength));
+        setFeedback([]);
+        setAttempts(0);
+        setGuess("");
+        setGiveUp(2);
+        setWin(false);
+      },5000);
+    }
+  },[win]);
 
   return (
     <div className="page">
@@ -232,6 +249,8 @@ function GuessNumberGame() {
         {/* Attempts */}
         <div className="attempts">
           <span># Attempts: {attempts}</span>
+          {win && <span style={{background:'green',color:'white'}}>Completed</span>}
+          {win && <span>Resetting...</span>}
         </div>
 
         <hr />
@@ -256,6 +275,7 @@ function GuessNumberGame() {
           </div>
         </div>
       </div>
+      <ToastContainer position={"top-center"} />
     </div>
   );
 }
