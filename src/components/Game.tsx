@@ -1,83 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import { loseMessages, winMessages } from "./Message";
 
 interface result {
   guess: string;
   correctDigits: number;
   correctPositions: number;
 }
-const winMessages = [
-  "Boom! You cracked the code — {n}-digit brain, {t} tries. Legendary!",
-  "Mission complete! You bullied that number into submission in just {t} tries.",
-  "Your brain just unlocked God Mode — guessed {n} in {t} tries!",
-  "Are you psychic or just showing off? {n} digits, {t} tries. Respect.",
-  "Number defeated. Ego boosted. {t} tries. Clean victory.",
-  "Game over… for the number 😎 Took you only {t} tries!",
-  "NASA called. They want that calculation speed back 🚀",
-  "That guess was smoother than WiFi at 3AM 📶",
-];
-const loseMessages = [
-  "That number lived rent-free in your head and still won 🏠😂",
-  "Bhai tu rehne de, tere se na ho payega 😂",
-  "Even the number is confused how you missed that 🤔💀",
-  "Give up karde bhai, kitna try karega 💀",
-  "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
-  "Instagram Open kar or reels dekh 💀, tere se nhi ho payega",
-  "Your guesses had confidence. Accuracy? Not invited 😎🚫",
-  "Bhai ye game tere confidence pe chal raha hai, skill pe nahi 😭",
-  "That number dodged you like responsibilities 🏃‍♂️💨",
-  "Lagta hai number ne tujhe block kar diya 📵",
-  "Bhai, Arjun Kapoor tere se accha khelta hai!",
-  "Bhai, Arjun Kapoor tere se accha khelta hai!",
-  "Bhai, Arjun Kapoor tere se accha khelta hai!",
-  "Bhai, Arjun Kapoor tere se accha khelta hai!",
-  "You didn’t lose… you just *strategically failed* 📉😌",
-  "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
-  "Bhai tu guess nahi kar raha, attendance laga raha hai 📝",
-  "Plot twist: The number was never scared of you 🎭😬",
-  "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
-  "Ye number nahi milega, ye government job hai 😭",
-  "You guessed so wrong the number felt safe 🛡️😂",
-  "Bhai tu itna close bhi nahi tha jitna tu soch raha hai 🤡",
-  "Bhai give up karde, Kyu mera server ka paisa barbad kar rha",
-  "That wasn’t guessing. That was creative writing ✍️🤣",
-  "Ye guessing nahi, andhadhun teer chalana hai 🎯🙈",
-  "Achievement unlocked: Professional Overthinker 🧠🔓",
-  "Number tujhe dekh ke has raha hai 😂",
-  "The number hid in plain sight and you still walked past it 👀🚶‍♂️",
-  "Bhai calculator bhi bol raha ‘main nahi help karunga’ 🧮🚫",
-  "That guess had confidence of 100, accuracy of 2 💯➡️2",
-  "Tu number dhoond raha, number tujhe ignore kar raha 😶",
-  "You didn’t miss. You *missed dramatically* 🎬💥",
-  "Itna galat guess toh exam me bhi nahi hota 📉🤣",
-  "Breaking News: Player loses to random number 📰💔",
-  "Bhai tu try kar raha hai ya warm-up? 🏃‍♂️",
-  "The number blinked… you missed 👁️❌",
-  "Ek din problem reh jayega, aur tu history bann jayega!",
-  "Lagta hai tu vibe pe guess kar raha hai, logic pe nahi ✨🧠",
-  "You guessed like WiFi in a basement 📶⬇️",
-  "Bhai tera aim aur stormtrooper ka aim same hai 🎯❌",
-  "You didn’t lose the game. You fed the number’s ego 🍽️😤",
-  "Ye game tujhe nahi, tu game ko disappoint kar raha hai 😔",
-  "The number didn’t move. You still couldn’t find it 🧍‍♂️🔍",
-  "Bhai tu haar nahi raha, tu history bana raha hai 📚💀",
-  "The number wants a rematch. It’s still bored 😒🔁",
-  "Number ne bola ‘bhai main yahi hoon’, tu phir bhi miss kiya 😭",
-  "Respect the effort. Fear the results 🫡📉",
-  "Bhai tu guess nahi, random button mash kar raha hai 🎮😂",
-  "You played well… said no one 🫢🙃",
-  "Ye number nahi mila toh tu motivation video dekhne jayega 📹💔",
-  "The number survived. Barely entertained 🎪😐",
-  "Bhai tera luck bhi bol raha ‘main chalta hoon’ 🚶‍♂️🍀",
-  "You gave effort. The number gave disappointment 🎁😩",
-  "Tu aur sahi guess — kabhi mile hi nahi 🤝❌",
-  "Even autocorrect can guess better sometimes 📱😶",
-  "Bhai tu rehne de, chai pee le ☕😂",
-  "Your brain went on airplane mode mid-game ✈️😴",
-  "The number wasn’t hard. You just made it emotional 😭🔢",
-  "Number: ‘bhai please serious ho ja’ 😭",
-  "The number called. It said ‘try again buddy’ ☎️😏"
-];
 
 const getRandomLoseMessage = (guessCount:number) => {
   if(guessCount == 6){
@@ -96,7 +25,7 @@ const getRandomWinMessage = (number: string, tries: number, numberSize:number) =
   return randomMsg.replace("{n}", number).replace("{t}", tries.toString());
 };
 
-function GuessNumberGame() {
+const GuessNumberGame:React.FC = () => {
   const [numberLength, setNumberLength] = useState(4);
   const [secretNumber, setSecretNumber] = useState(generateNumber(4));
   const [guess, setGuess] = useState("");
@@ -105,6 +34,7 @@ function GuessNumberGame() {
   const focus = useRef<HTMLInputElement | null>(null);
   const [giveUpmsg, setGiveUp] = useState<number>(2);
   const [win ,setWin] = useState<boolean>(false);
+
   function generateNumber(length: number) {
     let num = "";
     for (let i = 0; i < length; i++) {
@@ -126,16 +56,18 @@ function GuessNumberGame() {
 
   function checkGuess() {
     const maxAttempts = 6;
-    
+    let correctDigits = 0;
+    let correctPositions = 0;
+    const newFeedback: result = {
+      guess,
+      correctDigits,
+      correctPositions,
+    };
 
     if (guess.length !== numberLength) {
       toast(`Please enter a ${numberLength}-digit number`);
       return;
     }
-
-    let correctDigits = 0;
-    let correctPositions = 0;
-
     // Convert to arrays for easier manipulation
     const secretArr = secretNumber.split("");
     const guessArr = guess.split("");
@@ -164,13 +96,7 @@ function GuessNumberGame() {
         }
       }
     }
-
-    const newFeedback: result = {
-      guess,
-      correctDigits,
-      correctPositions,
-    };
-
+    
     setFeedback([newFeedback, ...feedback]);
     setAttempts(attempts + 1);
 
