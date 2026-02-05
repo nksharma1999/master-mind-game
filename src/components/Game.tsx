@@ -58,16 +58,12 @@ const GuessNumberGame:React.FC = () => {
     const maxAttempts = 6;
     let correctDigits = 0;
     let correctPositions = 0;
-    const newFeedback: result = {
-      guess,
-      correctDigits,
-      correctPositions,
-    };
-
+  
     if (guess.length !== numberLength) {
       toast(`Please enter a ${numberLength}-digit number`);
       return;
     }
+    
     // Convert to arrays for easier manipulation
     const secretArr = secretNumber.split("");
     const guessArr = guess.split("");
@@ -96,7 +92,11 @@ const GuessNumberGame:React.FC = () => {
         }
       }
     }
-    
+    const newFeedback: result = {
+      guess,
+      correctDigits,
+      correctPositions,
+    };
     setFeedback([newFeedback, ...feedback]);
     setAttempts(attempts + 1);
 
