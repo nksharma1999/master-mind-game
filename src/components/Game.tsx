@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { loseMessages, winMessages } from "./Message";
+import OTPInput from "./OTPInput";
 
 interface result {
   guess: string;
@@ -25,7 +26,29 @@ const getRandomWinMessage = (number: string, tries: number, numberSize:number) =
   return randomMsg.replace("{n}", number).replace("{t}", tries.toString());
 };
 
+// Save JSON data to localStorage
+const storeData = (key:string, data:any[]) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+// Retrieve JSON data from localStorage
+const getInfo = (key:string) => {
+  const storedData = localStorage.getItem(key);
+  return storedData ? JSON.parse(storedData) : null;
+};
+
+const updateData = (key:string, newData:any) => { 
+  const existingData = getInfo(key); 
+  if (existingData) { 
+    const updatedData = [newData, ...existingData ]; 
+    storeData(key, updatedData); 
+  } else { 
+    storeData(key, [newData]); // if no existing data, just store new 
+  } 
+};
+
 const GuessNumberGame:React.FC = () => {
+  const [options] = useState(Array(10).fill(10));
   const [numberLength, setNumberLength] = useState(4);
   const [secretNumber, setSecretNumber] = useState(generateNumber(4));
   const [guess, setGuess] = useState("");
@@ -52,6 +75,10 @@ const GuessNumberGame:React.FC = () => {
     setGuess("");
     setGiveUp(2);
     setWin(false);
+  }
+
+  const guessInput = (val:string) =>{
+    setGuess(val);
   }
 
   function checkGuess() {
@@ -101,6 +128,11 @@ const GuessNumberGame:React.FC = () => {
     setAttempts(attempts + 1);
 
     if (guess === secretNumber) {
+      // updateData("UserHistory",{
+      //   number:guess,
+      //   attempts:attempts+1,
+      //   guessHistory: feedback
+      // })
       setWin(true);
       toast(`🎉 ${getRandomWinMessage(secretNumber, attempts + 1,numberLength)} 🏆`);
       return;
@@ -140,38 +172,12 @@ const GuessNumberGame:React.FC = () => {
         <div className="difficulty-box">
           <span>Difficulty</span>
           <select value={numberLength} onChange={handleLengthChange}>
-            <option value={1}>1 Digits</option>
-            <option value={2}>2 Digits</option>
-            <option value={3}>3 Digits</option>
-            <option value={4}>4 Digits</option>
-            <option value={5}>5 Digits</option>
-            <option value={6}>6 Digits</option>
-            <option value={7}>7 Digits</option>
-            <option value={8}>8 Digits</option>
-            <option value={9}>9 Digits</option>
+            {options.map((_,index) =>{
+              return <option value={index+1}>{index+1} Digits</option>;
+            })}
           </select>
         </div>
-
-        {/* Input + Button */}
-        <div className="guess-row">
-          <input
-            ref={focus}
-            type="text"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            placeholder={`Enter ${numberLength}-digit number`}
-            value={guess}
-            maxLength={numberLength}
-            onChange={(e) => setGuess(e.target.value.replace(/\D/g, ""))}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                checkGuess();
-              }
-            }}
-          />
-          <button onClick={checkGuess}>Guess</button>
-        </div>
-
+        <OTPInput length={numberLength} onSubmit={checkGuess} guessInput={guessInput} />
         {/* Attempts */}
         <div className="attempts">
           <span># Attempts: {attempts}</span>
