@@ -128,11 +128,11 @@ const GuessNumberGame:React.FC = () => {
     setAttempts(attempts + 1);
 
     if (guess === secretNumber) {
-      // updateData("UserHistory",{
-      //   number:guess,
-      //   attempts:attempts+1,
-      //   guessHistory: feedback
-      // })
+      updateData("UserHistory",{
+        number:guess,
+        attempts:attempts+1,
+        guessHistory: feedback
+      })
       setWin(true);
       toast(`🎉 ${getRandomWinMessage(secretNumber, attempts + 1,numberLength)} 🏆`);
       return;
@@ -173,7 +173,7 @@ const GuessNumberGame:React.FC = () => {
           <span>Difficulty</span>
           <select value={numberLength} onChange={handleLengthChange}>
             {options.map((_,index) =>{
-              return <option value={index+1}>{index+1} Digits</option>;
+              return <option key={index} value={index+1}>{index+1} Digits</option>;
             })}
           </select>
         </div>
