@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { loseMessages, winMessages } from "./Message";
 import OTPInput from "./OTPInput";
 
@@ -207,7 +207,6 @@ const GuessNumberGame:React.FC = () => {
           </div>
         </div>
       </div>
-      <ToastContainer position={"top-center"} />
     </div>
   );
 }
